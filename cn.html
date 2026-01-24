@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cảm Nhận - Mùa Xuân Khai Trường</title>
     <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Patrick+Hand&display=swap" rel="stylesheet">
+    <style>
+        /* Animation thẻ bài xuất hiện nhẹ nhàng */
+        .card { animation: floatUp 0.6s ease-out; }
+        @keyframes floatUp { from { opacity: 0; transform: translateY(20px) scale(0.9); } to { opacity: 1; transform: translateY(0) scale(1); } }
+    </style>
 </head>
 <body>
     <header>
@@ -21,33 +27,139 @@
 
     <main class="testimonial-page">
         <section class="intro">
-            <h1>Gửi Ước Nguyện Xuân</h1>
-            <p>Nơi lưu giữ những dòng cảm xúc, kỷ niệm và hy vọng ngày đầu năm mới.</p>
+            <h1>🌸 Bức Tường Lưu Bút 🌸</h1>
+            <p>Viết những điều ước nhỏ, gửi vào gió xuân bay cao...</p>
         </section>
 
-        <div class="testimonial-grid">
-            <div class="card">
-                <p>"Mỗi mùa xuân về, nhìn những gương mặt rạng rỡ của học trò, tôi lại thấy tâm hồn mình trẻ lại."</p>
-                <h4>- Cô Minh Thu -</h4>
+        <div class="testimonial-grid" id="danhSachLoiChuc">
+            <div class="card bg-pink">
+                <span class="pin">📍</span>
+                <p class="content">"Mỗi mùa xuân về, nhìn những gương mặt rạng rỡ của học trò, tôi lại thấy tâm hồn mình trẻ lại."</p>
+                <div class="card-footer">
+                    <h4>- Cô Minh Thu -</h4>
+                    <span class="date">24/01/2026</span>
+                </div>
             </div>
-            <div class="card">
-                <p>"Em ước mong năm mới cả lớp mình sẽ cùng nhau đỗ đạt nguyện vọng 1!"</p>
-                <h4>- Nam Anh (12A1) -</h4>
+            <div class="card bg-yellow">
+                <span class="pin">📌</span>
+                <p class="content">"Em ước mong năm mới cả lớp mình sẽ cùng nhau đỗ đạt nguyện vọng 1! Cố lên nhé 12A1 ơi!"</p>
+                <div class="card-footer">
+                    <h4>- Nam Anh (12A1) -</h4>
+                    <span class="date">24/01/2026</span>
+                </div>
             </div>
-            <div class="card">
-                <p>"Tiếng trống trường khai xuân luôn là âm thanh rộn rã nhất trong lòng em."</p>
-                <h4>- Linh Chi -</h4>
+            <div class="card bg-green">
+                <span class="pin">📍</span>
+                <p class="content">"Tiếng trống trường khai xuân luôn là âm thanh rộn rã nhất trong lòng em."</p>
+                <div class="card-footer">
+                    <h4>- Linh Chi -</h4>
+                    <span class="date">24/01/2026</span>
+                </div>
             </div>
         </div>
 
         <section class="add-comment">
-            <h3>Để lại lời chúc của bạn</h3>
-            <form>
-                <input type="text" placeholder="Tên của bạn..." required>
-                <textarea placeholder="Viết cảm nhận của bạn vào đây..." rows="4"></textarea>
-                <button type="button">Gửi lời chúc</button>
+            <h3>✍️ Gửi gắm tâm tư</h3>
+            <form id="formLoiChuc">
+                <input type="text" id="tenNguoiDung" placeholder="Tên của bạn là..." required>
+                <textarea id="noiDungLoiChuc" placeholder="Bạn đang nghĩ gì thế?..." rows="4" required></textarea>
+                
+                <button type="button" onclick="guiLoiChuc()">Dán lên tường</button>
             </form>
         </section>
     </main>
+
+    <script>
+        // 1. Khi trang web vừa tải xong, hãy lấy dữ liệu cũ ra và dán lên tường
+        document.addEventListener('DOMContentLoaded', function() {
+            loadLoiChucTuKho();
+        });
+
+        function guiLoiChuc() {
+            var ten = document.getElementById("tenNguoiDung").value;
+            var loiChuc = document.getElementById("noiDungLoiChuc").value;
+
+            if (ten === "" || loiChuc === "") {
+                alert("Bạn ơi, đừng để giấy trắng nhé!");
+                return;
+            }
+
+            // Tạo dữ liệu cho lời chúc mới
+            var today = new Date();
+            var dateStr = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
+            
+            // Random màu sắc và ghim
+            var colors = ['bg-pink', 'bg-yellow', 'bg-green', 'bg-blue'];
+            var randomColor = colors[Math.floor(Math.random() * colors.length)];
+            
+            var pins = ['📍', '📌', '📎'];
+            var randomPin = pins[Math.floor(Math.random() * pins.length)];
+
+            // Đóng gói thông tin thành một Đối tượng (Object)
+            var duLieuLoiChuc = {
+                id: Date.now(), // Tạo ID riêng để không bị trùng
+                ten: ten,
+                noiDung: loiChuc,
+                ngay: dateStr,
+                mauSac: randomColor,
+                ghim: randomPin
+            };
+
+            // A. Hiển thị lên giao diện ngay lập tức
+            hienThiMotLoiChuc(duLieuLoiChuc);
+
+            // B. Lưu vào bộ nhớ trình duyệt (localStorage)
+            luuVaoKho(duLieuLoiChuc);
+
+            // Reset ô nhập
+            document.getElementById("tenNguoiDung").value = "";
+            document.getElementById("noiDungLoiChuc").value = "";
+        }
+
+        // Hàm phụ: Chỉ dùng để hiển thị 1 lời chúc ra màn hình
+        function hienThiMotLoiChuc(data) {
+            var theMoi = document.createElement("div");
+            theMoi.className = "card " + data.mauSac;
+            theMoi.innerHTML = `
+                <span class="pin">${data.ghim}</span>
+                <p class="content">"${data.noiDung}"</p>
+                <div class="card-footer">
+                    <h4>- ${data.ten} -</h4>
+                    <span class="date">${data.ngay}</span>
+                </div>
+            `;
+            
+            var danhSach = document.getElementById("danhSachLoiChuc");
+            // prepend để thêm vào đầu danh sách
+            danhSach.prepend(theMoi); 
+        }
+
+        // Hàm phụ: Lưu dữ liệu vào localStorage
+        function luuVaoKho(loiChucMoi) {
+            // 1. Lấy danh sách cũ ra (nếu chưa có thì tạo mảng rỗng)
+            var danhSachCu = localStorage.getItem('LoiChucXuan_Data');
+            var mangLoiChuc = danhSachCu ? JSON.parse(danhSachCu) : [];
+
+            // 2. Thêm lời chúc mới vào danh sách
+            mangLoiChuc.push(loiChucMoi);
+
+            // 3. Lưu ngược lại vào kho (phải chuyển thành chuỗi JSON)
+            localStorage.setItem('LoiChucXuan_Data', JSON.stringify(mangLoiChuc));
+        }
+
+        // Hàm phụ: Tải dữ liệu từ kho khi mới vào trang
+        function loadLoiChucTuKho() {
+            var danhSachCu = localStorage.getItem('LoiChucXuan_Data');
+            if (danhSachCu) {
+                var mangLoiChuc = JSON.parse(danhSachCu);
+                
+                // Duyệt qua từng lời chúc đã lưu và hiển thị lại
+                // Dùng forEach để hiển thị từng cái
+                mangLoiChuc.forEach(function(item) {
+                    hienThiMotLoiChuc(item);
+                });
+            }
+        }
+    </script>
 </body>
 </html>

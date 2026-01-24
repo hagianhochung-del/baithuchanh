@@ -235,3 +235,193 @@ nav ul li a.active {
     border-radius: 8px;
     cursor: pointer;
 }
+/* --- PHẦN THÊM MỚI CHO TRANG KHOẢNH KHẮC (GALLERY) --- */
+
+/* Tiêu đề trang */
+.gallery-header {
+    margin-bottom: 50px;
+}
+.gallery-header h1 {
+    color: #e74c3c;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+.gallery-header p {
+    color: #666;
+    font-style: italic;
+}
+
+/* Chia khoảng cách giữa các Album */
+.album-section {
+    margin-bottom: 60px; /* Cách nhau ra cho thoáng */
+    text-align: left; /* Tiêu đề căn trái cho gọn */
+}
+
+/* Trang trí tiêu đề Album */
+.album-title {
+    border-left: 5px solid #ff416c; /* Đường kẻ đỏ bên trái */
+    padding-left: 15px;
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 25px;
+}
+
+/* Nâng cấp ô chứa ảnh để làm hiệu ứng Overlay */
+.photo {
+    position: relative; /* Quan trọng để định vị chữ bên trong */
+    overflow: hidden; /* Để hiệu ứng không bị tràn ra ngoài */
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* Ảnh gốc */
+.photo img {
+    display: block;
+    width: 100%;
+    height: 250px; /* Tăng chiều cao lên chút cho đẹp */
+    object-fit: cover;
+    transition: transform 0.5s ease; /* Thời gian phóng to chậm rãi hơn */
+}
+
+/* Lớp phủ đen mờ (Ban đầu ẩn đi) */
+.overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); /* Màu đen nhạt dần */
+    overflow: hidden;
+    width: 100%;
+    height: 0; /* Ban đầu chiều cao = 0 (ẩn) */
+    transition: .5s ease; /* Hiệu ứng trượt lên */
+    display: flex;
+    align-items: flex-end; /* Chữ nằm dưới đáy */
+    justify-content: center;
+}
+
+/* Chữ chú thích bên trong */
+.text {
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 20px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+}
+
+/* --- HIỆU ỨNG KHI DI CHUỘT (HOVER) --- */
+
+/* Ảnh phóng to */
+.photo:hover img {
+    transform: scale(1.1);
+}
+
+/* Lớp phủ hiện lên */
+.photo:hover .overlay {
+    height: 100%; /* Tràn đầy khung hình hoặc chỉnh 50% nếu muốn */
+}
+/* --- PHẦN NÂNG CẤP GIAO DIỆN CẢM NHẬN (MEMORY WALL) --- */
+
+/* 1. Nền trang thêm họa tiết giấy */
+.testimonial-page {
+    background-image: radial-gradient(#e6e6e6 1px, transparent 1px);
+    background-size: 20px 20px; /* Tạo hiệu ứng chấm bi mờ như vở học sinh */
+    max-width: 1200px;
+}
+
+/* 2. Grid hiển thị dạng Masonry (so le) */
+.testimonial-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    padding: 20px;
+}
+
+/* 3. Thẻ Card biến thành tờ giấy Note */
+.card {
+    background-color: #fff;
+    width: 280px; /* Cố định chiều rộng giống giấy note */
+    min-height: 200px;
+    padding: 25px 20px;
+    position: relative;
+    box-shadow: 3px 3px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    border-radius: 2px 2px 20px 2px; /* Cong nhẹ 1 góc giống giấy quăn */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Hiệu ứng khi di chuột vào lời chúc */
+.card:hover {
+    transform: scale(1.05) rotate(0deg) !important; /* Phóng to và về thẳng hàng */
+    z-index: 10;
+    box-shadow: 10px 10px 20px rgba(0,0,0,0.15);
+}
+
+/* 4. Typography (Phông chữ) */
+.card .content {
+    font-family: 'Patrick Hand', cursive; /* Chữ viết tay dễ đọc */
+    font-size: 1.3rem;
+    color: #444;
+    line-height: 1.4;
+    margin-bottom: 15px;
+}
+
+.card h4 {
+    font-family: 'Dancing Script', cursive; /* Chữ ký bay bướm */
+    font-size: 1.4rem;
+    color: #d35400;
+    margin: 0;
+    text-align: right;
+}
+
+.card .date {
+    font-size: 0.8rem;
+    color: #888;
+    display: block;
+    text-align: right;
+    margin-top: 5px;
+    font-style: italic;
+}
+
+/* 5. Trang trí cái ghim */
+.pin {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.5rem;
+    z-index: 5;
+    text-shadow: 2px 2px 2px rgba(0,0,0,0.2);
+}
+
+/* 6. Màu sắc ngẫu nhiên (Pastel - Màu phấn) */
+.bg-pink { background-color: #ffecd2; background-image: linear-gradient(120deg, #fccb90 0%, #d57eeb 100%); opacity: 0.95; }
+.bg-yellow { background-color: #fff9c4; background-image: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%); opacity: 0.95; }
+.bg-green { background-color: #dcedc8; background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%); opacity: 0.95; }
+.bg-blue { background-color: #e1f5fe; background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%); opacity: 0.95; }
+
+/* Override màu nền đơn sắc nếu muốn dùng màu giấy trơn thay vì gradient */
+.bg-pink { background: #ffc3a0; } 
+.bg-yellow { background: #fff59d; }
+.bg-green { background: #c5e1a5; }
+.bg-blue { background: #81d4fa; }
+
+
+/* 7. Tạo sự lộn xộn tự nhiên (Xoay ngẫu nhiên) */
+.card:nth-child(odd) { transform: rotate(3deg); }
+.card:nth-child(even) { transform: rotate(-2deg); }
+.card:nth-child(3n) { transform: rotate(1deg); }
+.card:nth-child(4n) { transform: rotate(-4deg); }
+
+/* 8. Form nhập liệu phong cách hơn */
+.add-comment {
+    background: #fff;
+    border: 2px dashed #ff416c; /* Viền nét đứt */
+}
+.add-comment h3 {
+    color: #ff416c;
+    font-family: 'Dancing Script', cursive;
+    font-size: 2rem;
+}
