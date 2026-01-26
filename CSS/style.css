@@ -1,0 +1,477 @@
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    line-height: 1.6;
+    color: #333;
+    background-color: #fffaf0; /* Màu trắng kem nhẹ nhàng */
+}
+
+header {
+    background: linear-gradient(to right, #ff416c, #ff4b2b); /* Màu đỏ cam rực rỡ */
+    color: white;
+    padding: 2rem 0;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.hero {
+    height: 400px;
+    background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
+                      url('https://images.unsplash.com/photo-1506744038136-46273834b3fb'); /* Thay bằng ảnh hoa xuân của bạn */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+}
+
+.hero h2 {
+    font-size: 3rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+button {
+    background-color: #f1c40f;
+    border: none;
+    padding: 12px 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 25px;
+    transition: transform 0.3s;
+}
+
+button:hover {
+    transform: scale(1.1);
+    background-color: #d4ac0d;
+}
+
+/* Thiết lập cho phần Hero để hoa không bay ra ngoài */
+.hero {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Định dạng cánh hoa */
+.petal {
+    position: absolute;
+    top: -50px;
+    font-size: 20px;
+    user-select: none;
+    cursor: default;
+    animation-name: fall;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+/* Hiệu ứng rơi và lắc lư */
+@keyframes fall {
+    0% {
+        top: -10%;
+        transform: translateX(0) rotate(0deg);
+    }
+    100% {
+        top: 110%;
+        transform: translateX(100px) rotate(360deg);
+    }
+}
+
+/* Tạo sự khác biệt cho từng cánh hoa (vị trí, thời gian rơi) */
+.petal:nth-child(1) { left: 10%; animation-duration: 7s; animation-delay: 0s; }
+.petal:nth-child(2) { left: 30%; animation-duration: 10s; animation-delay: 2s; }
+.petal:nth-child(3) { left: 50%; animation-duration: 8s; animation-delay: 4s; }
+.petal:nth-child(4) { left: 70%; animation-duration: 12s; animation-delay: 1s; }
+.petal:nth-child(5) { left: 90%; animation-duration: 9s; animation-delay: 3s; }
+
+.gallery-container {
+    padding: 50px;
+    text-align: center;
+}
+
+.grid-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.photo img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover; /* Giữ ảnh không bị méo */
+    border-radius: 10px;
+    transition: transform 0.3s;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.photo img:hover {
+    transform: scale(1.05); /* Hiệu ứng phóng to nhẹ khi di chuột vào */
+}
+
+/* Tô màu link đang kích hoạt */
+nav ul li a.active {
+    color: #ffb100;
+    border-bottom: 2px solid #ffb100;
+}
+
+.contact-container {
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.contact-content {
+    display: flex;
+    gap: 50px;
+    margin-top: 40px;
+    text-align: left;
+    flex-wrap: wrap; /* Tự động xuống dòng trên điện thoại */
+}
+
+/* Trang trí Form */
+.contact-form {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contact-form input, .contact-form textarea {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.contact-form button {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.contact-form button:hover {
+    background: #c0392b;
+}
+
+/* Trang trí thông tin bên cạnh */
+.contact-info {
+    flex: 1;
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.map-placeholder {
+    width: 100%;
+    height: 150px;
+    background: #e9ecef;
+    margin-top: 20px;
+    border-radius: 5px;
+    text-align: center;
+    color: #666;
+}
+.testimonial-page {
+    padding: 50px 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.intro h1 { color: #e74c3c; font-size: 2.5rem; }
+
+.add-comment {
+    margin-top: 60px;
+    background: #fff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.add-comment input, .add-comment textarea {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.add-comment button {
+    width: 100%;
+    background: #2ecc71; /* Màu xanh lá lộc non */
+    color: white;
+    border: none;
+    padding: 15px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+}
+/* --- PHẦN THÊM MỚI CHO TRANG KHOẢNH KHẮC (GALLERY) --- */
+
+/* Tiêu đề trang */
+.gallery-header {
+    margin-bottom: 50px;
+}
+.gallery-header h1 {
+    color: #e74c3c;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+.gallery-header p {
+    color: #666;
+    font-style: italic;
+}
+
+/* Chia khoảng cách giữa các Album */
+.album-section {
+    margin-bottom: 60px; /* Cách nhau ra cho thoáng */
+    text-align: left; /* Tiêu đề căn trái cho gọn */
+}
+
+/* Trang trí tiêu đề Album */
+.album-title {
+    border-left: 5px solid #ff416c; /* Đường kẻ đỏ bên trái */
+    padding-left: 15px;
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 25px;
+}
+
+/* Nâng cấp ô chứa ảnh để làm hiệu ứng Overlay */
+.photo {
+    position: relative; /* Quan trọng để định vị chữ bên trong */
+    overflow: hidden; /* Để hiệu ứng không bị tràn ra ngoài */
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* Ảnh gốc */
+.photo img {
+    display: block;
+    width: 100%;
+    height: 250px; /* Tăng chiều cao lên chút cho đẹp */
+    object-fit: cover;
+    transition: transform 0.5s ease; /* Thời gian phóng to chậm rãi hơn */
+}
+
+/* Lớp phủ đen mờ (Ban đầu ẩn đi) */
+.overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); /* Màu đen nhạt dần */
+    overflow: hidden;
+    width: 100%;
+    height: 0; /* Ban đầu chiều cao = 0 (ẩn) */
+    transition: .5s ease; /* Hiệu ứng trượt lên */
+    display: flex;
+    align-items: flex-end; /* Chữ nằm dưới đáy */
+    justify-content: center;
+}
+
+/* Chữ chú thích bên trong */
+.text {
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 20px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+}
+
+/* --- HIỆU ỨNG KHI DI CHUỘT (HOVER) --- */
+
+/* Ảnh phóng to */
+.photo:hover img {
+    transform: scale(1.1);
+}
+
+/* Lớp phủ hiện lên */
+.photo:hover .overlay {
+    height: 100%; /* Tràn đầy khung hình hoặc chỉnh 50% nếu muốn */
+}
+/* --- PHẦN NÂNG CẤP GIAO DIỆN CẢM NHẬN (MEMORY WALL) --- */
+
+/* 1. Nền trang thêm họa tiết giấy */
+.testimonial-page {
+    background-image: radial-gradient(#e6e6e6 1px, transparent 1px);
+    background-size: 20px 20px; /* Tạo hiệu ứng chấm bi mờ như vở học sinh */
+    max-width: 1200px;
+}
+
+/* 2. Grid hiển thị dạng Masonry (so le) */
+.testimonial-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    padding: 20px;
+}
+
+/* 3. Thẻ Card biến thành tờ giấy Note */
+.card {
+    background-color: #fff;
+    width: 280px; /* Cố định chiều rộng giống giấy note */
+    min-height: 200px;
+    padding: 25px 20px;
+    position: relative;
+    box-shadow: 3px 3px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    border-radius: 2px 2px 20px 2px; /* Cong nhẹ 1 góc giống giấy quăn */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Hiệu ứng khi di chuột vào lời chúc */
+.card:hover {
+    transform: scale(1.05) rotate(0deg) !important; /* Phóng to và về thẳng hàng */
+    z-index: 10;
+    box-shadow: 10px 10px 20px rgba(0,0,0,0.15);
+}
+
+/* 4. Typography (Phông chữ) */
+.card .content {
+    font-family: 'Patrick Hand', cursive; /* Chữ viết tay dễ đọc */
+    font-size: 1.3rem;
+    color: #444;
+    line-height: 1.4;
+    margin-bottom: 15px;
+}
+
+.card h4 {
+    font-family: 'Dancing Script', cursive; /* Chữ ký bay bướm */
+    font-size: 1.4rem;
+    color: #d35400;
+    margin: 0;
+    text-align: right;
+}
+
+.card .date {
+    font-size: 0.8rem;
+    color: #888;
+    display: block;
+    text-align: right;
+    margin-top: 5px;
+    font-style: italic;
+}
+
+/* 5. Trang trí cái ghim */
+.pin {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.5rem;
+    z-index: 5;
+    text-shadow: 2px 2px 2px rgba(0,0,0,0.2);
+}
+
+/* 6. Màu sắc ngẫu nhiên (Pastel - Màu phấn) */
+.bg-pink { background-color: #ffecd2; background-image: linear-gradient(120deg, #fccb90 0%, #d57eeb 100%); opacity: 0.95; }
+.bg-yellow { background-color: #fff9c4; background-image: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%); opacity: 0.95; }
+.bg-green { background-color: #dcedc8; background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%); opacity: 0.95; }
+.bg-blue { background-color: #e1f5fe; background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%); opacity: 0.95; }
+
+/* Override màu nền đơn sắc nếu muốn dùng màu giấy trơn thay vì gradient */
+.bg-pink { background: #ffc3a0; } 
+.bg-yellow { background: #fff59d; }
+.bg-green { background: #c5e1a5; }
+.bg-blue { background: #81d4fa; }
+
+
+/* 7. Tạo sự lộn xộn tự nhiên (Xoay ngẫu nhiên) */
+.card:nth-child(odd) { transform: rotate(3deg); }
+.card:nth-child(even) { transform: rotate(-2deg); }
+.card:nth-child(3n) { transform: rotate(1deg); }
+.card:nth-child(4n) { transform: rotate(-4deg); }
+
+/* 8. Form nhập liệu phong cách hơn */
+.add-comment {
+    background: #fff;
+    border: 2px dashed #ff416c; /* Viền nét đứt */
+}
+.add-comment h3 {
+    color: #ff416c;
+    font-family: 'Dancing Script', cursive;
+    font-size: 2rem;
+}
+/* 1. Tìm đoạn CSS cho header hiện tại và thêm dòng "position: relative;" vào */
+header {
+    background: linear-gradient(to right, #ff416c, #ff4b2b); /* Màu đỏ cam rực rỡ */
+    color: white;
+    padding: 2rem 0;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    /* THÊM DÒNG NÀY ĐỂ LÀM MỐC ĐỊNH VỊ CHO LOGO */
+    position: relative;
+}
+
+/* 2. Thêm đoạn CSS mới này vào cuối file CSS của bạn để định dạng cho logo */
+.header-logo {
+    position: absolute; /* Cho phép di chuyển tự do trong header */
+    top: 15px;          /* Cách mép trên 15px */
+    right: 20px;        /* Cách mép phải 20px */
+    width: 80px;        /* Độ rộng của logo (bạn có thể tăng giảm số này tùy thích) */
+    height: auto;       /* Chiều cao tự động theo tỷ lệ */
+    z-index: 100;       /* Đảm bảo logo nằm trên cùng, không bị che */
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); /* Thêm bóng nhẹ cho logo nổi bật hơn trên nền đỏ */
+}
+/* Điều chỉnh Header để chứa logo khít hơn */
+header {
+    background: linear-gradient(to right, #ff416c, #ff4b2b); /* */
+    color: white; /* */
+    padding: 1.5rem 0; /* Giảm padding một chút để header gọn gàng */
+    text-align: center; /* */
+    position: relative; /* Làm mốc cho logo */
+    min-height: 120px; /* Đảm bảo header có độ cao tối thiểu cho logo */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Định dạng logo to vừa khít header */
+.header-logo {
+    position: absolute;
+    top: 50%;           /* Căn giữa theo chiều dọc */
+    right: 30px;        /* Cách lề phải 30px */
+    transform: translateY(-50%); /* Kỹ thuật giúp logo luôn nằm giữa header */
+    height: 90%;        /* Chiếm 90% chiều cao header để có chút khoảng trống trên dưới */
+    width: auto;        /* Tự động điều chỉnh chiều rộng theo tỷ lệ ảnh */
+    z-index: 10;
+    transition: all 0.3s ease; /* Hiệu ứng mượt mà */
+}
+
+/* Hiệu ứng khi di chuột vào logo */
+.header-logo:hover {
+    transform: translateY(-50%) scale(1.1); /* Phóng to nhẹ khi rê chuột */
+}
