@@ -118,20 +118,51 @@
 
         // Hàm phụ: Chỉ dùng để hiển thị 1 lời chúc ra màn hình
         function hienThiMotLoiChuc(data) {
-            var theMoi = document.createElement("div");
-            theMoi.className = "card " + data.mauSac;
-            theMoi.innerHTML = `
-                <span class="pin">${data.ghim}</span>
-                <p class="content">"${data.noiDung}"</p>
-                <div class="card-footer">
-                    <h4>- ${data.ten} -</h4>
-                    <span class="date">${data.ngay}</span>
-                </div>
-            `;
-            
-            var danhSach = document.getElementById("danhSachLoiChuc");
-            // prepend để thêm vào đầu danh sách
-            danhSach.prepend(theMoi); 
+        var theMoi = document.createElement("div");
+        // Thiết lập ID cho thẻ div để dễ dàng xóa khỏi giao diện sau này
+        theMoi.id = "card-" + data.id; 
+        theMoi.className = "card " + data.mauSac;
+    
+        // Thêm nút xóa (dấu X) vào nội dung thẻ
+        theMoi.innerHTML = `
+        <span class="pin">${data.ghim}</span>
+        <span class="delete-btn" onclick="xoaLoiChuc(${data.id})" 
+              style="float:right; cursor:pointer; font-weight:bold; color:rgba(0,0,0,0.3);">×</span>
+        <p class="content">"${data.noiDung}"</p>
+        <div class="card-footer">
+            <h4>- ${data.ten} -</h4>
+            <span class="date">${data.ngay}</span>
+        </div>
+        `;
+    
+        var danhSach = document.getElementById("danhSachLoiChuc");
+        danhSach.prepend(theMoi);
+        }
+
+        function xoaLoiChuc(id) {
+        if (confirm("Bạn có muốn gỡ lời chúc này xuống không?")) {
+        // 1. Lấy danh sách hiện tại từ kho
+        var danhSachCu = localStorage.getItem('LoiChucXuan_Data');
+        if (!danhSachCu) return;
+
+        var mangLoiChuc = JSON.parse(danhSachCu);
+
+        // 2. Lọc bỏ lời chúc có ID trùng khớp
+        var mangMoi = mangLoiChuc.filter(function(item) {
+            return item.id !== id; 
+        });
+
+        // 3. Lưu lại danh sách mới vào kho
+        localStorage.setItem('LoiChucXuan_Data', JSON.stringify(mangMoi));
+
+        // 4. Xóa thẻ bài đó ngay trên giao diện mà không cần tải lại trang
+        var phanTuXoa = document.getElementById("card-" + id);
+        if (phanTuXoa) {
+            phanTuXoa.style.opacity = '0';
+            phanTuXoa.style.transform = 'scale(0.8)';
+            setTimeout(() => phanTuXoa.remove(), 300); // Hiệu ứng biến mất nhẹ nhàng
+        }
+        }
         }
 
         // Hàm phụ: Lưu dữ liệu vào localStorage
