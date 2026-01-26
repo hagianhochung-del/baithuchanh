@@ -425,3 +425,53 @@ nav ul li a.active {
     font-family: 'Dancing Script', cursive;
     font-size: 2rem;
 }
+/* 1. Tìm đoạn CSS cho header hiện tại và thêm dòng "position: relative;" vào */
+header {
+    background: linear-gradient(to right, #ff416c, #ff4b2b); /* Màu đỏ cam rực rỡ */
+    color: white;
+    padding: 2rem 0;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    /* THÊM DÒNG NÀY ĐỂ LÀM MỐC ĐỊNH VỊ CHO LOGO */
+    position: relative;
+}
+
+/* 2. Thêm đoạn CSS mới này vào cuối file CSS của bạn để định dạng cho logo */
+.header-logo {
+    position: absolute; /* Cho phép di chuyển tự do trong header */
+    top: 15px;          /* Cách mép trên 15px */
+    right: 20px;        /* Cách mép phải 20px */
+    width: 80px;        /* Độ rộng của logo (bạn có thể tăng giảm số này tùy thích) */
+    height: auto;       /* Chiều cao tự động theo tỷ lệ */
+    z-index: 100;       /* Đảm bảo logo nằm trên cùng, không bị che */
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); /* Thêm bóng nhẹ cho logo nổi bật hơn trên nền đỏ */
+}
+/* Điều chỉnh Header để chứa logo khít hơn */
+header {
+    background: linear-gradient(to right, #ff416c, #ff4b2b); /* */
+    color: white; /* */
+    padding: 1.5rem 0; /* Giảm padding một chút để header gọn gàng */
+    text-align: center; /* */
+    position: relative; /* Làm mốc cho logo */
+    min-height: 120px; /* Đảm bảo header có độ cao tối thiểu cho logo */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Định dạng logo to vừa khít header */
+.header-logo {
+    position: absolute;
+    top: 50%;           /* Căn giữa theo chiều dọc */
+    right: 30px;        /* Cách lề phải 30px */
+    transform: translateY(-50%); /* Kỹ thuật giúp logo luôn nằm giữa header */
+    height: 90%;        /* Chiếm 90% chiều cao header để có chút khoảng trống trên dưới */
+    width: auto;        /* Tự động điều chỉnh chiều rộng theo tỷ lệ ảnh */
+    z-index: 10;
+    transition: all 0.3s ease; /* Hiệu ứng mượt mà */
+}
+
+/* Hiệu ứng khi di chuột vào logo */
+.header-logo:hover {
+    transform: translateY(-50%) scale(1.1); /* Phóng to nhẹ khi rê chuột */
+}
