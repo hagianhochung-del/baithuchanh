@@ -548,3 +548,18 @@ header {
     font-size: 13px;
     color: #777;
 }
+/* --- CẤU HÌNH CHO VIDEO TRONG GALLERY --- */
+
+.photo video {
+    width: 100%;
+    height: 250px;       /* BẮT BUỘC: Phải bằng chiều cao của .photo img hiện tại */
+    object-fit: cover;   /* Quan trọng: Giúp video lấp đầy khung mà không bị méo */
+    border-radius: 10px; /* Bo tròn góc giống ảnh */
+    display: block;
+    transition: transform 0.5s ease; /* Độ mượt khi phóng to */
+}
+
+/* Hiệu ứng phóng to khi di chuột vào video */
+.photo:hover video {
+    transform: scale(1.1);
+}
