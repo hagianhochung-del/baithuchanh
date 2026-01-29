@@ -36,7 +36,7 @@
                 <span class="pin">📍</span>
                 <p class="content">"Mỗi mùa xuân về, nhìn những gương mặt rạng rỡ của học trò, tôi lại thấy tâm hồn mình trẻ lại."</p>
                 <div class="card-footer">
-                    <h4>- Cô Minh Thu -</h4>
+                    <h4>- thầy Hà Thanh Tuệ -</h4>
                     <span class="date">24/01/2026</span>
                 </div>
             </div>
@@ -44,7 +44,7 @@
                 <span class="pin">📌</span>
                 <p class="content">"Em ước mong năm mới cả lớp mình sẽ cùng nhau đỗ đạt nguyện vọng 1! Cố lên nhé 12A1 ơi!"</p>
                 <div class="card-footer">
-                    <h4>- Nam Anh (12A1) -</h4>
+                    <h4>- Đông Chung 12A1 -</h4>
                     <span class="date">24/01/2026</span>
                 </div>
             </div>
@@ -52,7 +52,7 @@
                 <span class="pin">📍</span>
                 <p class="content">"Tiếng trống trường khai xuân luôn là âm thanh rộn rã nhất trong lòng em."</p>
                 <div class="card-footer">
-                    <h4>- Linh Chi -</h4>
+                    <h4>- Gia Bảo 12A1 -</h4>
                     <span class="date">24/01/2026</span>
                 </div>
             </div>
@@ -68,129 +68,5 @@
             </form>
         </section>
     </main>
-
-    <script>
-        // 1. Khi trang web vừa tải xong, hãy lấy dữ liệu cũ ra và dán lên tường
-        document.addEventListener('DOMContentLoaded', function() {
-            loadLoiChucTuKho();
-        });
-
-        function guiLoiChuc() {
-            var ten = document.getElementById("tenNguoiDung").value;
-            var loiChuc = document.getElementById("noiDungLoiChuc").value;
-
-            if (ten === "" || loiChuc === "") {
-                alert("Bạn ơi, đừng để giấy trắng nhé!");
-                return;
-            }
-
-            // Tạo dữ liệu cho lời chúc mới
-            var today = new Date();
-            var dateStr = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
-            
-            // Random màu sắc và ghim
-            var colors = ['bg-pink', 'bg-yellow', 'bg-green', 'bg-blue'];
-            var randomColor = colors[Math.floor(Math.random() * colors.length)];
-            
-            var pins = ['📍', '📌', '📎'];
-            var randomPin = pins[Math.floor(Math.random() * pins.length)];
-
-            // Đóng gói thông tin thành một Đối tượng (Object)
-            var duLieuLoiChuc = {
-                id: Date.now(), // Tạo ID riêng để không bị trùng
-                ten: ten,
-                noiDung: loiChuc,
-                ngay: dateStr,
-                mauSac: randomColor,
-                ghim: randomPin
-            };
-
-            // A. Hiển thị lên giao diện ngay lập tức
-            hienThiMotLoiChuc(duLieuLoiChuc);
-
-            // B. Lưu vào bộ nhớ trình duyệt (localStorage)
-            luuVaoKho(duLieuLoiChuc);
-
-            // Reset ô nhập
-            document.getElementById("tenNguoiDung").value = "";
-            document.getElementById("noiDungLoiChuc").value = "";
-        }
-
-        // Hàm phụ: Chỉ dùng để hiển thị 1 lời chúc ra màn hình
-        function hienThiMotLoiChuc(data) {
-        var theMoi = document.createElement("div");
-        // Thiết lập ID cho thẻ div để dễ dàng xóa khỏi giao diện sau này
-        theMoi.id = "card-" + data.id; 
-        theMoi.className = "card " + data.mauSac;
-    
-        // Thêm nút xóa (dấu X) vào nội dung thẻ
-        theMoi.innerHTML = `
-        <span class="pin">${data.ghim}</span>
-        <span class="delete-btn" onclick="xoaLoiChuc(${data.id})" 
-              style="float:right; cursor:pointer; font-weight:bold; color:rgba(0,0,0,0.3);">×</span>
-        <p class="content">"${data.noiDung}"</p>
-        <div class="card-footer">
-            <h4>- ${data.ten} -</h4>
-            <span class="date">${data.ngay}</span>
-        </div>
-        `;
-    
-        var danhSach = document.getElementById("danhSachLoiChuc");
-        danhSach.prepend(theMoi);
-        }
-
-        function xoaLoiChuc(id) {
-        if (confirm("Bạn có muốn gỡ lời chúc này xuống không?")) {
-        // 1. Lấy danh sách hiện tại từ kho
-        var danhSachCu = localStorage.getItem('LoiChucXuan_Data');
-        if (!danhSachCu) return;
-
-        var mangLoiChuc = JSON.parse(danhSachCu);
-
-        // 2. Lọc bỏ lời chúc có ID trùng khớp
-        var mangMoi = mangLoiChuc.filter(function(item) {
-            return item.id !== id; 
-        });
-
-        // 3. Lưu lại danh sách mới vào kho
-        localStorage.setItem('LoiChucXuan_Data', JSON.stringify(mangMoi));
-
-        // 4. Xóa thẻ bài đó ngay trên giao diện mà không cần tải lại trang
-        var phanTuXoa = document.getElementById("card-" + id);
-        if (phanTuXoa) {
-            phanTuXoa.style.opacity = '0';
-            phanTuXoa.style.transform = 'scale(0.8)';
-            setTimeout(() => phanTuXoa.remove(), 300); // Hiệu ứng biến mất nhẹ nhàng
-        }
-        }
-        }
-
-        // Hàm phụ: Lưu dữ liệu vào localStorage
-        function luuVaoKho(loiChucMoi) {
-            // 1. Lấy danh sách cũ ra (nếu chưa có thì tạo mảng rỗng)
-            var danhSachCu = localStorage.getItem('LoiChucXuan_Data');
-            var mangLoiChuc = danhSachCu ? JSON.parse(danhSachCu) : [];
-
-            // 2. Thêm lời chúc mới vào danh sách
-            mangLoiChuc.push(loiChucMoi);
-
-            // 3. Lưu ngược lại vào kho (phải chuyển thành chuỗi JSON)
-            localStorage.setItem('LoiChucXuan_Data', JSON.stringify(mangLoiChuc));
-        }
-
-        // Hàm phụ: Tải dữ liệu từ kho khi mới vào trang
-        function loadLoiChucTuKho() {
-            var danhSachCu = localStorage.getItem('LoiChucXuan_Data');
-            if (danhSachCu) {
-                var mangLoiChuc = JSON.parse(danhSachCu);
-                
-                // Duyệt qua từng lời chúc đã lưu và hiển thị lại
-                // Dùng forEach để hiển thị từng cái
-                mangLoiChuc.forEach(function(item) {
-                    hienThiMotLoiChuc(item);
-                });
-            }
-        }
-    </script>
 </body>
 </html>

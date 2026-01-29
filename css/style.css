@@ -475,3 +475,76 @@ header {
 .header-logo:hover {
     transform: translateY(-50%) scale(1.1); /* Phóng to nhẹ khi rê chuột */
 }
+
+.footer-section {
+    background-color: #e8f5f1; /* Màu nền xanh nhạt như ảnh */
+    color: #4a5a54;           /* Màu chữ xanh đậm */
+    padding: 50px 0 20px 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    max-width: 1100px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    padding: 0 20px;
+}
+
+.footer-col {
+    flex: 1;
+    min-width: 250px;
+    margin-bottom: 30px;
+}
+
+.footer-logo img {
+    width: 80px; /* Điều chỉnh kích thước logo */
+    margin-bottom: 15px;
+}
+
+.footer-col h4 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #2d3e38;
+    font-weight: bold;
+}
+
+.footer-col p {
+    line-height: 1.6;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.footer-col ul {
+    list-style: disc;
+    margin-left: 20px;
+    font-size: 14px;
+}
+
+/* Style cho cái nút Gửi lời nhắn */
+.btn-message {
+    display: inline-block;
+    background-color: #5bb3a2; /* Màu xanh của nút */
+    color: white;
+    padding: 12px 25px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 15px;
+    transition: 0.3s;
+}
+
+.btn-message:hover {
+    background-color: #4a9486;
+}
+
+/* Phần bản quyền bên dưới cùng */
+.footer-copyright {
+    text-align: center;
+    border-top: 1px solid #d1deda;
+    margin-top: 20px;
+    padding-top: 20px;
+    font-size: 13px;
+    color: #777;
+}
